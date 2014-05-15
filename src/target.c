@@ -1,7 +1,6 @@
 #include "target.h"
 
-void getTargetDimensions(Target *target, uint32_t *width, uint32_t *height)
-{
+void getTargetDimensions(Target *target, uint32_t *width, uint32_t *height) {
   if (target->clientAreaSet) {
     *width = target->clientArea.x2 - target->clientArea.x1;
     *height = target->clientArea.y2 - target->clientArea.y1;
@@ -20,8 +19,7 @@ void getTargetDimensions(Target *target, uint32_t *width, uint32_t *height)
   }
 }
 
-void getTargetPosition(Target *target, uint32_t *left, uint32_t *top)
-{
+void getTargetPosition(Target *target, uint32_t *left, uint32_t *top) {
   switch (target->kind) {
     case RawKind:
       *left = 0;
@@ -34,16 +32,14 @@ void getTargetPosition(Target *target, uint32_t *left, uint32_t *top)
   }
 }
 
-Color getTargetPixel(Target *target, uint32_t x, uint32_t y)
-{
+Color getTargetPixel(Target *target, uint32_t x, uint32_t y) {
   TargetData data = getTargetData(target, x, y, 1, 1);
   Color color = data.data[0].color;
   freeTargetData(target);
   return color;
 }
 
-TargetData getTargetData(Target *target, uint32_t x, uint32_t y, uint32_t width, uint32_t height)
-{
+TargetData getTargetData(Target *target, uint32_t x, uint32_t y, uint32_t width, uint32_t height) {
   TargetData data = {0,};
   uint32_t _ = 0, _x = x, _y = y;
 
@@ -76,8 +72,7 @@ TargetData getTargetData(Target *target, uint32_t x, uint32_t y, uint32_t width,
   return data;
 }
 
-void freeTargetData(Target *target)
-{
+void freeTargetData(Target *target) {
   switch (target->kind) {
     case RawKind:
     case EIOSKind:
@@ -85,8 +80,7 @@ void freeTargetData(Target *target)
   }
 }
 
-void getTargetMousePos(Target *target, uint32_t *x, uint32_t *y)
-{
+void getTargetMousePos(Target *target, uint32_t *x, uint32_t *y) {
   switch (target->kind) {
     case RawKind:
       break;
@@ -97,8 +91,7 @@ void getTargetMousePos(Target *target, uint32_t *x, uint32_t *y)
   }
 }
 
-void setTargetMousePos(Target *target, uint32_t x, uint32_t y)
-{
+void setTargetMousePos(Target *target, uint32_t x, uint32_t y) {
   switch (target->kind) {
     case RawKind:
       break;
@@ -109,8 +102,7 @@ void setTargetMousePos(Target *target, uint32_t x, uint32_t y)
   }
 }
 
-MouseAction getTargetMouseAction(Target *target, MouseButton button)
-{
+MouseAction getTargetMouseAction(Target *target, MouseButton button) {
   switch (target->kind) {
     case RawKind:
       break;
@@ -125,8 +117,7 @@ MouseAction getTargetMouseAction(Target *target, MouseButton button)
   return UnknownMouse;
 }
 
-void setTargetMouseAction(Target *target, MouseAction action, MouseButton button)
-{
+void setTargetMouseAction(Target *target, MouseAction action, MouseButton button) {
   uint32_t x = 0, y = 0;
 
   switch (target->kind) {
@@ -151,8 +142,7 @@ void setTargetMouseAction(Target *target, MouseAction action, MouseButton button
   }
 }
 
-KeyAction getTargetKeyAction(Target *target, uint32_t key)
-{
+KeyAction getTargetKeyAction(Target *target, uint32_t key) {
   switch (target->kind) {
     case RawKind:
       break;
@@ -167,8 +157,7 @@ KeyAction getTargetKeyAction(Target *target, uint32_t key)
   return UnknownKey;
 }
 
-void setTargetKeyAction(Target *target, KeyAction action, uint32_t key)
-{
+void setTargetKeyAction(Target *target, KeyAction action, uint32_t key) {
   switch (target->kind) {
     case RawKind:
       break;
@@ -189,14 +178,13 @@ void setTargetKeyAction(Target *target, KeyAction action, uint32_t key)
   }
 }
 
-bool setTargetClientArea(Target *target, uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2)
-{
+bool setTargetClientArea(Target *target, uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2) {
   uint32_t width = 0, height = 0;
   getTargetDimensions(target, &width, &height);
-  
+
   if (((x2 - x1) > width) || ((y2 - y1) > height))
     return false;
-  
+
   target->clientArea.x1 = x1;
   target->clientArea.y1 = y1;
   target->clientArea.x2 = x2;
@@ -205,8 +193,7 @@ bool setTargetClientArea(Target *target, uint32_t x1, uint32_t y1, uint32_t x2, 
   return true;
 }
 
-void resetTargetClientArea(Target *target)
-{
+void resetTargetClientArea(Target *target) {
   target->clientAreaSet = false;
   memset(&(target->clientArea), 0, sizeof(ClientArea));
 }
