@@ -17,16 +17,14 @@ typedef struct bitmap_t {
 
 
 
-extern bool process_pixels(bitmap *bmp, uint32_t size, uint16_t bpp);
-extern void un_process_pixels(bitmap *bmp, uint8_t *outbuffer, uint32_t size, uint16_t bpp);
-
 extern bool createbitmap(bitmap *bmp, uint32_t width, uint32_t height);
 extern bool copybitmap(bitmap *in, bitmap *out);
 extern bool bitmap_from_file(bitmap *bmp, const char *filepath);
 extern bool bitmap_from_24bit_string(bitmap *bmp, const char *str);
 extern bool bitmap_from_32bit_string(bitmap *bmp, const char *str);
 extern bool savebmp(bitmap *bmp, const char *filepath, uint16_t bpp);
-extern bool bitmap_to_string(bitmap *bmp, char **str, uint32_t *len);
+extern bool bitmap_to_24bit_string(bitmap *bmp, char **str, uint32_t *len);
+extern bool bitmap_to_32bit_string(bitmap *bmp, char **str, uint32_t *len);
 extern void freebmp(bitmap *bmp);
 
 #endif

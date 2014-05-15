@@ -1,6 +1,6 @@
 #include "bitmap.h"
 
-bool process_pixels(bitmap *bmp, uint32_t size, uint16_t bpp) {
+bool __process_pixels(bitmap *bmp, uint32_t size, uint16_t bpp) {
   uint32_t I, J;
   uint32_t height = bmp->height;
   uint32_t width = bmp->width;
@@ -31,7 +31,7 @@ bool process_pixels(bitmap *bmp, uint32_t size, uint16_t bpp) {
   return true;
 }
 
-void un_process_pixels(bitmap *bmp, uint8_t *outbuffer, uint32_t size, uint16_t bpp) {
+void __un_process_pixels(bitmap *bmp, uint8_t *outbuffer, uint32_t size, uint16_t bpp) {
   uint32_t I, J;
   rgb32 *in = bmp->pixels;
   uint32_t height = bmp->height;
@@ -121,7 +121,7 @@ bool bitmap_from_file(bitmap *bmp, const char *filepath) {
     }
 
     fclose(file);
-    return process_pixels(bmp, size, bpp);
+    return __process_pixels(bmp, size, bpp);
   }
   perror("Cannot open file.");
 
@@ -200,7 +200,61 @@ bool bitmap_from_32bit_string(bitmap *bmp, const char *str) {
   return false;
 }
 
-bool bitmap_to_string(bitmap *bmp, char **str, uint32_t *len) {
+bool bitmap_to_24bit_string(bitmap *bmp, char **str, uint32_t *len) {
+  if (!bmp || !bmp->pixels)
+    return false;
+
+  int I, J;
+  uint32_t size = ((bmp->width * 24 + 31) / 32) * 4 * bmp->height;
+  rgb24 *pixels = malloc(size);
+
+  if (pixels) {
+    for (I = 0; I < bmp->height; ++I) {
+      for (J = 0; J < bmp->width; ++J) {
+        pixels[I * bmp->width + J].b = bmp->pixels[I * bmp->width + J].r;
+        pixels[I * bmp->width + J].g = bmp->pixels[I * bmp->width + J].g;
+        pixels[I * bmp->width + J].r = bmp->pixels[I * bmp->width + J].b;
+      }
+    }
+
+    uint32_t destlen = compressBound(size);
+    *str = malloc(destlen);
+
+    if (*str) {
+      if (compress((Bytef *)*str, (uLongf *)&destlen, (Bytef *)pixels, size) == Z_OK) {
+        free(pixels);
+        pixels = NULL;
+
+        char *b64str;
+        uint32_t b64_len;
+
+        if (base64encode((const uint8_t *)*str, destlen, &b64str, &b64_len)) {
+          free(*str);
+          *str = b64str;
+          *len = b64_len + 2;
+
+          b64str = malloc(*len);
+          if (b64str) {
+            b64str[0] = 'm';
+            strncpy(&b64str[1], *str, b64_len);
+            free(*str);
+            *str = b64str;
+            (*str)[b64_len + 1] = '\0';
+            return true;
+          }
+        }
+      }
+
+      free(*str);
+      *len = 0;
+      *str = NULL;
+    }
+    free(pixels);
+  }
+  return false;
+}
+
+bool bitmap_to_32bit_string(bitmap *bmp, char **str, uint32_t *len) {
   if (!bmp || !bmp->pixels)
     return false;
 
@@ -216,7 +270,7 @@ bool bitmap_to_string(bitmap *bmp, char **str, uint32_t *len) {
       if (base64encode((const uint8_t *)*str, destlen, &b64str, &b64_len)) {
         free(*str);
         *str = b64str;
-        *len = b64_len + 1;
+        *len = b64_len + 2;
 
         b64str = malloc(*len);
         if (b64str) {
@@ -224,6 +278,7 @@ bool bitmap_to_string(bitmap *bmp, char **str, uint32_t *len) {
           strncpy(&b64str[1], *str, b64_len);
           free(*str);
           *str = b64str;
+          (*str)[b64_len + 1] = '\0';
           return true;
         }
       }
@@ -257,7 +312,7 @@ bool savebmp(bitmap *bmp, const char *filepath, uint16_t bpp) {
     uint32_t bfSize = 54 + size;
 
     uint8_t *pixels = malloc(size);
-    un_process_pixels(bmp, pixels, size, bpp);
+    __un_process_pixels(bmp, pixels, size, bpp);
 
     fwrite(&type, sizeof(type), 1, file);
     fwrite(&bfSize, sizeof(bfSize), 1, file);
