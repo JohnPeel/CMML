@@ -4,35 +4,23 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stddef.h>
 
 #include "color.h"
+#include "eios.h"
 #include "input.h"
 
 typedef struct RawTarget_t {
   uint32_t width;
   uint32_t height;
-  rgb32 *data;
+  ColorData *data;
 } RawTarget;
-
-typedef struct BitmapTarget_t {
-  void *bitmap; //FIXME: MufasaBitmap
-} BitmapTarget;
-
-typedef struct EIOSClient_t {
-  
-} EIOSClient;
 
 typedef struct EIOSTarget_t {
   EIOSClient *client;
   void *target;
-  rgb32 *buffer;
-  uint32_t width;
-  uint32_t height;
+  ColorData *buffer;
 } EIOSTarget;
-
-typedef struct WindowTarget_t {
-  void *window; //FIXME: Window
-} WindowTarget;
 
 typedef struct ClientArea_t {
   uint32_t x1;
@@ -44,15 +32,14 @@ typedef struct ClientArea_t {
 typedef struct TargetData_t {
   ColorData *data;
   uint32_t rowWidth;
+  uint32_t incData;
 } TargetData;
 
-typedef enum {WindowKind, RawKind, BitmapKind, EIOSKind} TargetKind;
+typedef enum {RawKind, EIOSKind} TargetKind;
 typedef struct Target_t {
   TargetKind kind;
   union {
-    WindowTarget windowData;
-    RawTarget rawData;
-    BitmapTarget bitmapData;
+    RawTarget rawData;;
     EIOSTarget eiosData;
   };
   bool clientAreaSet;
@@ -63,7 +50,7 @@ typedef struct Target_t {
 extern void getTargetDimensions(Target *target, uint32_t *width, uint32_t *height);
 extern void getTargetPosition(Target *target, uint32_t *left, uint32_t *top);
 extern Color getTargetPixel(Target *target, uint32_t x, uint32_t y);
-extern TargetData *getTargetData(Target *target, uint32_t x, uint32_t y, uint32_t width, uint32_t height);
+extern TargetData getTargetData(Target *target, uint32_t x, uint32_t y, uint32_t width, uint32_t height);
 extern void freeTargetData(Target *target);
 
 extern void getTargetMousePos(Target *target, uint32_t *x, uint32_t *y);
@@ -73,7 +60,7 @@ extern void setTargetMouseAction(Target *target, MouseAction action, MouseButton
 extern KeyAction getTargetKeyAction(Target *target, uint32_t key);
 extern void setTargetKeyAction(Target *target, KeyAction action, uint32_t key);
 
-extern bool setClientArea(Target *target, uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2);
-extern void resetClientArea(Target *target);
+extern bool setTargetClientArea(Target *target, uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2);
+extern void resetTargetClientArea(Target *target);
 
 #endif //__target_h_

@@ -29,7 +29,6 @@ typedef struct bgr32_t {
   uint8_t a;
 } bgr32;
 
-
 typedef uint32_t Color;
 
 typedef struct ColorData_t {

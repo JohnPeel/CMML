@@ -1,20 +1,28 @@
-.PHONY: clean build strip
+.PHONY: clean build strip build_shared build_static test-app
 
 CC = gcc
 CFLAGS = -Wall -fexceptions -g -fPIC -Iinclude
 LD = $(CC)
-LDFLAGS = --shared $(CFLAGS)
+LDFLAGS = --shared $(CFLAGS) -ldl
+AR = ar
 STRIP = strip
 
-EXEC = lib$(notdir $(shell pwd)).so
+EXEC = lib$(notdir $(shell pwd))
 SOURCES = $(shell find src -type f -iname '*.c')
 OBJECTS = $(patsubst src/%.c,lib/%.o,$(SOURCES))
 DEPENDS = $(OBJECTS:.o=.d)
 
-build: bin/$(EXEC)
+build: build_shared build_static
 
-bin/$(EXEC): $(OBJECTS)
-	$(LD) $(LDFLAGS) -o bin/$(EXEC) $(OBJECTS)
+build_shared: bin/${EXEC}.so
+
+build_static: bin/${EXEC}.a
+
+bin/${EXEC}.so: $(OBJECTS)
+	$(LD) $(LDFLAGS) -o "bin/${EXEC}.so" $(OBJECTS)
+
+bin/${EXEC}.a: $(OBJECTS)
+	$(AR) -Dcr "bin/${EXEC}.a" $(OBJECTS)
 
 lib/%.o: src/%.c
 	$(CC) -MMD -c $(CFLAGS) $< -o $@
@@ -22,7 +30,15 @@ lib/%.o: src/%.c
 -include $(DEPENDS)
 
 clean:
-	rm -rf bin/$(EXEC) $(OBJECTS) $(DEPENDS)
+	rm -rf lib bin
 
 strip: build
-	$(STRIP) -s bin/$(EXEC)
+	$(STRIP) bin/$(EXEC).so
+
+test-app: bin/test
+
+lib/test.o: test-app/test.c
+	$(CC) -c $(CFLAGS) test-app/test.c -o lib/test.o
+	
+bin/test: lib/test.o build_static
+	$(CC) $(CFLAGS) -o bin/test lib/test.o bin/${EXEC}.a -ldl
