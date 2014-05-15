@@ -2,6 +2,7 @@
 #define __color_h_
 
 #include <stdint.h>
+#include <math.h>
 
 typedef struct rgb24_t {
   uint8_t r;
@@ -29,6 +30,19 @@ typedef struct bgr32_t {
   uint8_t a;
 } bgr32;
 
+typedef struct xyz_t {
+  float x, y, z;
+} xyz;
+
+typedef struct hsl_t {
+  float h, s, l;
+} hsl;
+
+typedef struct lab_t {
+  float l, a, b;
+} lab;
+
+
 typedef uint32_t Color;
 
 typedef struct ColorData_t {
@@ -38,4 +52,7 @@ typedef struct ColorData_t {
   };
 } ColorData;
 
-#endif //__color_h_
+
+
+
+#endif
