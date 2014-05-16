@@ -54,9 +54,11 @@ void __un_process_pixels(bitmap *bmp, uint8_t *outbuffer, uint32_t size, uint16_
 
 bool createbitmap(bitmap *bmp, uint32_t width, uint32_t height) {
   if (bmp && !bmp->pixels) {
-    if ((bmp->pixels = malloc(((width * 32 + 31) / 32) * 4 * height))) {
+    size_t size = ((width * 32 + 31) / 32) * 4 * height;
+    if ((bmp->pixels = malloc(size))) {
       bmp->width = width;
       bmp->height = height;
+      memset(bmp->pixels, 0, size);
       return true;
     }
   }
