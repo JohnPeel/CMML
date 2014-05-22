@@ -9,10 +9,14 @@
 #include "utils.h"
 #include "zlib.h"
 
-typedef struct bitmap_t {
-  uint32_t width;
-  uint32_t height;
-  rgb32 *pixels;
+/** @brief Structure representing a 32-bit bitmap.
+ *  @Notes Should be changed to Target_t or RawTarget_t in the future.
+ */
+typedef struct bitmap_t
+{
+    uint32_t width;
+    uint32_t height;
+    rgb32 *pixels;
 } bitmap;
 
 

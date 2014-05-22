@@ -9,7 +9,7 @@ STRIP = strip
 
 EXEC = lib$(notdir $(shell pwd))
 SOURCES = $(shell find src -type f -iname '*.c')
-OBJECTS = $(patsubst src/%.c,lib/%.o,$(SOURCES))
+OBJECTS = $(patsubst src/%.c,obj/%.o,$(SOURCES))
 DEPENDS = $(OBJECTS:.o=.d)
 
 build: build_shared build_static
@@ -24,21 +24,21 @@ bin/${EXEC}.so: $(OBJECTS)
 bin/${EXEC}.a: $(OBJECTS)
 	$(AR) -Dcr "bin/${EXEC}.a" $(OBJECTS)
 
-lib/%.o: src/%.c
+obj/%.o: src/%.c
 	$(CC) -MMD -c $(CFLAGS) $< -o $@
 
 -include $(DEPENDS)
 
 clean:
-	rm -rf lib bin
+	rm -rf obj bin
 
 strip: build
 	$(STRIP) bin/$(EXEC).so
 
 test-app: bin/test
 
-lib/test.o: test-app/test.c
-	$(CC) -c $(CFLAGS) test-app/test.c -o lib/test.o
+obj/test.o: test-app/test.c
+	$(CC) -c $(CFLAGS) test-app/test.c -o obj/test.o
 	
-bin/test: lib/test.o build_static
-	$(CC) $(CFLAGS) -o bin/test lib/test.o bin/${EXEC}.a -ldl
+bin/test: obj/test.o build_static
+	$(CC) $(CFLAGS) -o bin/test obj/test.o bin/${EXEC}.a -ldl

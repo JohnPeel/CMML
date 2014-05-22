@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1400783330 source:c:\users\brandon\desktop\cmml-master\src\eios.c
+	"eios.h"
+
+1400783193 c:\users\brandon\desktop\cmml-master\include\eios.h
+	<stdint.h>
+	<stdbool.h>
+	<string.h>
+	<windows.h>
+	<dlfcn.h>
+	"color.h"
+
+1400783059 c:\users\brandon\desktop\cmml-master\include\color.h
+	<stdint.h>
+	<math.h>
+
+1400782741 source:c:\users\brandon\desktop\cmml-master\src\target.c
+	"target.h"
+
+1400782741 c:\users\brandon\desktop\cmml-master\include\target.h
+	<stdint.h>
+	<stdbool.h>
+	<string.h>
+	<stddef.h>
+	"color.h"
+	"eios.h"
+	"input.h"
+
+1400782741 c:\users\brandon\desktop\cmml-master\include\input.h
+
