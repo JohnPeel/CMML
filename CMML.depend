@@ -17,7 +17,7 @@
 1400812143 source:c:\users\john\documents\github\cmml\src\eios.c
 	"eios.h"
 
-1400812143 c:\users\john\documents\github\cmml\include\eios.h
+1400814602 c:\users\john\documents\github\cmml\include\eios.h
 	<stdint.h>
 	<stdbool.h>
 	<string.h>
@@ -55,4 +55,16 @@
 	<stdbool.h>
 	<string.h>
 	<stdlib.h>
+
+1400812442 source:c:\users\john\documents\github\cmml\src\bitmap.c
+	"bitmap.h"
+
+1400812143 c:\users\john\documents\github\cmml\include\bitmap.h
+	<stdlib.h>
+	<stdio.h>
+	<stdbool.h>
+	<string.h>
+	"color.h"
+	"utils.h"
+	"zlib.h"
 
