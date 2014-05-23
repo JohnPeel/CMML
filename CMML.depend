@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1400807848 source:c:\users\john\documents\github\cmml\src\dtm.c
+1400812142 source:c:\users\john\documents\github\cmml\src\dtm.c
 	"dtm.h"
 
-1400806425 c:\users\john\documents\github\cmml\include\dtm.h
+1400812143 c:\users\john\documents\github\cmml\include\dtm.h
 	<stdlib.h>
 	<string.h>
 	<stdint.h>
@@ -10,24 +10,24 @@
 	"zlib.h"
 	"color.h"
 
-1400808179 c:\users\john\documents\github\cmml\include\color.h
+1400812142 c:\users\john\documents\github\cmml\include\color.h
 	<stdint.h>
 	<math.h>
 
-1400807565 source:c:\users\john\documents\github\cmml\src\eios.c
+1400812143 source:c:\users\john\documents\github\cmml\src\eios.c
 	"eios.h"
 
-1400807452 c:\users\john\documents\github\cmml\include\eios.h
+1400812143 c:\users\john\documents\github\cmml\include\eios.h
 	<stdint.h>
 	<stdbool.h>
 	<string.h>
 	"dl.h"
 	"color.h"
 
-1400807849 source:c:\users\john\documents\github\cmml\src\target.c
+1400812143 source:c:\users\john\documents\github\cmml\src\target.c
 	"target.h"
 
-1400804935 c:\users\john\documents\github\cmml\include\target.h
+1400812142 c:\users\john\documents\github\cmml\include\target.h
 	<stdint.h>
 	<stdbool.h>
 	<string.h>
@@ -36,9 +36,23 @@
 	"eios.h"
 	"input.h"
 
-1400804935 c:\users\john\documents\github\cmml\include\input.h
+1400812143 c:\users\john\documents\github\cmml\include\input.h
 
-1400811759 c:\users\john\documents\github\cmml\include\dl.h
+1400812142 c:\users\john\documents\github\cmml\include\dl.h
 	<windows.h>
 	<dlfcn.h>
+
+1400812142 source:c:\users\john\documents\github\cmml\src\color.c
+	"color.h"
+
+1400812142 source:c:\users\john\documents\github\cmml\src\dl.c
+
+1400812142 source:c:\users\john\documents\github\cmml\src\utils.c
+	"utils.h"
+
+1400812143 c:\users\john\documents\github\cmml\include\utils.h
+	<stdint.h>
+	<stdbool.h>
+	<string.h>
+	<stdlib.h>
 
