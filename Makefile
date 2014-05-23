@@ -3,7 +3,7 @@
 CC = gcc
 CFLAGS = -Wall -fexceptions -g -fPIC -Iinclude
 LD = $(CC)
-LDFLAGS = --shared $(CFLAGS) -ldl
+LDFLAGS = --shared $(CFLAGS) -ldl -lz
 AR = ar
 STRIP = strip
 
