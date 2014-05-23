@@ -3,10 +3,12 @@
 bool resizeDTM(MDTM *dtm, uint32_t size)
 {
     MDTMPoint *points;
-    if (dtm->count > 0) {
+    if (dtm->count > 0)
+    {
         points = (MDTMPoint *)realloc(dtm->points, size * sizeof(MDTMPoint));
         //TODO: memset points + oldsize, size - oldsize, with \0
-    } else
+    }
+    else
         points = (MDTMPoint *)calloc(size, sizeof(MDTMPoint));
 
     if (points == NULL)
@@ -72,7 +74,7 @@ char *stringFromDTM(MDTM *dtm)
 
     uint32_t len = compressBound(size);
     char *buffer = malloc(len);
-    if (compress(buffer, &len, data, size) == Z_OK)
+    if (compress((Bytef *)buffer, (uLongf *)&len, data, size) == Z_OK)
     {
         free(data);
 
@@ -91,7 +93,8 @@ char *stringFromDTM(MDTM *dtm)
 
 MDTM stringToDTM(char *string)
 {
-
+    MDTM dtm;
+    return dtm;
 }
 
 uint32_t addDTMPoint(MDTM *dtm, MDTMPoint point)

@@ -4,15 +4,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
-#include <dlfcn.h>
-
+#include "dl.h"
 #include "color.h"
-
-#ifndef __i386__
-#ifdef _M_IX86
-#define __i386__
-#endif // _M_IX86
-#endif // __i386__
 
 #ifdef __i386__
 #define stdcall __attribute__((stdcall))
