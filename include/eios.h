@@ -46,22 +46,22 @@ typedef struct EIOSClient_t
     getTargetDimensionsT getTargetDimensions;
     getTargetPositionT getTargetPosition;
 
-	getImageBufferT getImageBuffer;
-	updateImageBufferT updateImageBuffer;
-	updateImageBufferBoxT updateImageBufferBox;
+    getImageBufferT getImageBuffer;
+    updateImageBufferT updateImageBuffer;
+    updateImageBufferBoxT updateImageBufferBox;
 
-	getMousePositionT getMousePosition;
-	moveMouseT moveMouse;
-	scrollMouseT scrollMouse;
-	holdMouseT holdMouse;
-	releaseMouseT releaseMouse;
-	isMouseButtonHeldT isMouseButtonHeld;
+    getMousePositionT getMousePosition;
+    moveMouseT moveMouse;
+    scrollMouseT scrollMouse;
+    holdMouseT holdMouse;
+    releaseMouseT releaseMouse;
+    isMouseButtonHeldT isMouseButtonHeld;
 
-	sendStringT sendString;
-	holdKeyT holdKey;
-	releaseKeyT releaseKey;
-	isKeyHeldT isKeyHeld;
-	getKeyCodeT getKeyCode;
+    sendStringT sendString;
+    holdKeyT holdKey;
+    releaseKeyT releaseKey;
+    isKeyHeldT isKeyHeld;
+    getKeyCodeT getKeyCode;
 } EIOSClient;
 
 extern bool loadEIOSClient(EIOSClient *client, char *path);
