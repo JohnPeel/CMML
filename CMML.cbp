@@ -71,11 +71,26 @@
 		<Compiler>
 			<Add directory="include" />
 		</Compiler>
+		<Linker>
+			<Add library="libz" />
+		</Linker>
+		<Unit filename="include/bitmap.h" />
 		<Unit filename="include/color.h" />
+		<Unit filename="include/dl.h" />
 		<Unit filename="include/dtm.h" />
 		<Unit filename="include/eios.h" />
 		<Unit filename="include/input.h" />
 		<Unit filename="include/target.h" />
+		<Unit filename="include/utils.h" />
+		<Unit filename="src/bitmap.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/color.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/dl.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="src/dtm.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -85,9 +100,13 @@
 		<Unit filename="src/target.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="src/utils.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<debugger />
+			<envvars />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

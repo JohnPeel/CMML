@@ -1,5 +1,5 @@
-#ifndef __DL_H_
-#define __DL_H_
+#ifndef __dl_h_
+#define __dl_h_
 
 #if defined _WIN32 || defined _WIN64
 #define WINDOWS
@@ -23,4 +23,4 @@
 #endif // _M_IX86
 #endif // __i386__
 
-#endif // __DL_H_
+#endif // __dl_h_

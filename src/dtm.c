@@ -83,7 +83,7 @@ char *stringFromDTM(MDTM *dtm)
         strcpy(compressed + sizeof(uint32_t), buffer);
         free(buffer);
 
-        //TODO: return "m" + base64encode(ret);
+        //FIXME: return "m" + base64encode(ret);
     }
 
     free(buffer);

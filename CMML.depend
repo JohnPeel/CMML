@@ -1,0 +1,44 @@
+# depslib dependency file v1.0
+1400807848 source:c:\users\john\documents\github\cmml\src\dtm.c
+	"dtm.h"
+
+1400806425 c:\users\john\documents\github\cmml\include\dtm.h
+	<stdlib.h>
+	<string.h>
+	<stdint.h>
+	<stdbool.h>
+	"zlib.h"
+	"color.h"
+
+1400808179 c:\users\john\documents\github\cmml\include\color.h
+	<stdint.h>
+	<math.h>
+
+1400807565 source:c:\users\john\documents\github\cmml\src\eios.c
+	"eios.h"
+
+1400807452 c:\users\john\documents\github\cmml\include\eios.h
+	<stdint.h>
+	<stdbool.h>
+	<string.h>
+	"dl.h"
+	"color.h"
+
+1400807849 source:c:\users\john\documents\github\cmml\src\target.c
+	"target.h"
+
+1400804935 c:\users\john\documents\github\cmml\include\target.h
+	<stdint.h>
+	<stdbool.h>
+	<string.h>
+	<stddef.h>
+	"color.h"
+	"eios.h"
+	"input.h"
+
+1400804935 c:\users\john\documents\github\cmml\include\input.h
+
+1400811759 c:\users\john\documents\github\cmml\include\dl.h
+	<windows.h>
+	<dlfcn.h>
+

@@ -1,5 +1,5 @@
-#ifndef BITMAP_H_INCLUDED
-#define BITMAP_H_INCLUDED
+#ifndef __bitmap_h_
+#define __bitmap_h_
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -9,10 +9,11 @@
 #include "utils.h"
 #include "zlib.h"
 
-typedef struct bitmap_t {
-  uint32_t width;
-  uint32_t height;
-  rgb32 *pixels;
+typedef struct bitmap_t
+{
+    uint32_t width;
+    uint32_t height;
+    rgb32 *pixels;
 } bitmap;
 
 
@@ -27,4 +28,4 @@ extern bool bitmap_to_24bit_string(bitmap *bmp, char **str, uint32_t *len);
 extern bool bitmap_to_32bit_string(bitmap *bmp, char **str, uint32_t *len);
 extern void freebmp(bitmap *bmp);
 
-#endif
+#endif // __bitmap_h_
