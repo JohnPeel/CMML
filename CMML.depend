@@ -14,10 +14,10 @@
 	<stdint.h>
 	<math.h>
 
-1400812143 source:c:\users\john\documents\github\cmml\src\eios.c
+1400817345 source:c:\users\john\documents\github\cmml\src\eios.c
 	"eios.h"
 
-1400814602 c:\users\john\documents\github\cmml\include\eios.h
+1400817465 c:\users\john\documents\github\cmml\include\eios.h
 	<stdint.h>
 	<stdbool.h>
 	<string.h>

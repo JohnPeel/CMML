@@ -1,6 +1,6 @@
 #include "bitmap.h"
 
-bool __process_pixels(bitmap *bmp, uint32_t size, uint16_t bpp)
+static bool process_pixels(bitmap *bmp, uint32_t size, uint16_t bpp)
 {
     uint32_t I, J;
     uint32_t height = bmp->height;
@@ -35,7 +35,7 @@ bool __process_pixels(bitmap *bmp, uint32_t size, uint16_t bpp)
     return true;
 }
 
-void __un_process_pixels(bitmap *bmp, uint8_t *outbuffer, uint32_t size, uint16_t bpp)
+static void un_process_pixels(bitmap *bmp, uint8_t *outbuffer, uint32_t size, uint16_t bpp)
 {
     uint32_t I, J;
     rgb32 *in = bmp->pixels;
@@ -142,7 +142,7 @@ bool bitmap_from_file(bitmap *bmp, const char *filepath)
         }
 
         fclose(file);
-        return __process_pixels(bmp, size, bpp);
+        return process_pixels(bmp, size, bpp);
     }
     perror("Cannot open file.");
 
@@ -359,7 +359,7 @@ bool savebmp(bitmap *bmp, const char *filepath, uint16_t bpp)
         uint32_t bfSize = 54 + size;
 
         uint8_t *pixels = malloc(size);
-        __un_process_pixels(bmp, pixels, size, bpp);
+        un_process_pixels(bmp, pixels, size, bpp);
 
         fwrite(&type, sizeof(type), 1, file);
         fwrite(&bfSize, sizeof(bfSize), 1, file);

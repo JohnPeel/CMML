@@ -88,9 +88,6 @@
 		<Unit filename="src/color.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="src/dl.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="src/dtm.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -107,6 +104,7 @@
 			<code_completion />
 			<debugger />
 			<envvars />
+			<editor_config active="1" use_tabs="0" tab_indents="1" tab_width="4" indent="4" eol_mode="2" />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
